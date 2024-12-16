@@ -1,0 +1,25 @@
+{
+    "compilerOptions": {
+      "target": "ES6",                        // The version of JavaScript to compile to (ES6 is commonly used)
+      "module": "commonjs",                   // Module system used (CommonJS is typical for Node.js)
+      "moduleResolution": "node",             // Module resolution strategy (works with node modules)
+      "strict": true,                         // Enables strict type checking options
+      "esModuleInterop": true,                // Allows default import syntax for CommonJS modules
+      "skipLibCheck": true,                   // Skip checking of declaration files for better performance
+      "forceConsistentCasingInFileNames": true, // Ensure consistent casing of file names
+      "outDir": "./dist",                     // Directory for compiled JavaScript files
+      "rootDir": "./src",                     // Root directory of your source TypeScript files
+      "resolveJsonModule": true,              // Allow importing .json files as modules
+      "declaration": true,                    // Generates .d.ts declaration files
+      "allowJs": true,                        // Allow JavaScript files to be included
+      "isolatedModules": true                 // Ensure each file can be treated as an isolated module
+    },
+    "include": [
+      "src/**/*.ts",                         // Include all .ts files inside the src folder
+      "node_modules/@cucumber/**/*.ts"       // Include .ts files from the cucumber module (if using Cucumber)
+    ],
+    "exclude": [
+      "node_modules"                          // Exclude node_modules folder from being compiled
+    ]
+  }
+  
