@@ -28,6 +28,12 @@ After(async function ({ pickle, result }) {
     await context.close();
 })
 
+AfterStep(async function({pickle}){
+    // Screenshot after each step
+    const image = await pageFixture.page.screenshot({ path: `./test-result/screenshots/${pickle.name}.png`, type: "png" });
+    await this.attach(image, "image/png");
+})
+
 AfterAll(async function () {
     await browser.close();
 });
