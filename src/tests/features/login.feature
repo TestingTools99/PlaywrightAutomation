@@ -1,8 +1,6 @@
-Feature: Login Scenarios
+Feature: Xero Login 
 
-Scenario: Perfoming Login Validation
-
-Given I am on Xero login Page
-When I login with valid credentials
-And  click on signIn button
-Then verify  login shpould be successful
+Scenario: Performing signing into Xero trial account
+Given navigating to Xero login page
+When user clicks on signIn with username is "y.tummalagunta@xero.com" and password is "Automation@12345"
+Then verify login should be successful

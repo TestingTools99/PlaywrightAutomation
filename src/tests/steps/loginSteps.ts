@@ -1,22 +1,27 @@
+import { Given, When, Then, setDefaultTimeout} from "@cucumber/cucumber";
+import { pageFixture } from "../../hooks/pageFixture";
+import { LoginPage } from "../pageInfo/LoginPage";
+import { DashBoardPage } from "../pageInfo/DashBoardPage";
+import { config } from '../../config'
+import { WaitUtils } from "../../utils/WaitUtils";
+setDefaultTimeout(20000);
 
-import { Given, When, Then } from '@cucumber/cucumber'
-import { chromium, Browser, BrowserContext, Page, expect } from '@playwright/test';
-import { pageFixture } from '../../hooks/pageFixture';
+let loginPage:LoginPage
+let dashBoardPage : DashBoardPage
 
-Given('I am on Xero login Page', async function () {
-    await pageFixture.page.goto('http://google.com'); 
-})
-
-When('I login with valid credentials', async function () {
-    await pageFixture.page.fill('.gLFyf', 'Selenium')
-})
-
-
-When('click on signIn button', async function () {
-    await pageFixture.page.click("[name='btnK']")
+Given("navigating to Xero login page", async function () {
+    loginPage = new LoginPage(pageFixture.page)
+    dashBoardPage = new DashBoardPage(pageFixture.page)
+    loginPage.navigateTo(config.baseURL)
 });
 
+When('user clicks on signIn with username is {string} and password is {string}', async function (userName, password) {
+     await loginPage.doPerformLogin(userName,password)
+  });
 
-Then('verify  login shpould be successful', async function () {
-    
-});
+  Then("verify login should be successful", async function () {
+    await loginPage.clickOnNotNow();
+    await pageFixture.page.waitForSelector('div.xnav-header--main > nav > ol > li:nth-child(1) > a', {state: 'visible',timeout: 15000});
+    await dashBoardPage.checkDashBoardLinkTab();
+  });
+  

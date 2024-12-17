@@ -1,4 +1,4 @@
-import { After, AfterAll, AfterStep, Before, BeforeAll, Status } from '@cucumber/cucumber';
+import { After, AfterAll, AfterStep, Before, BeforeAll, BeforeStep, Status } from '@cucumber/cucumber';
 import { Browser, BrowserContext, Page, chromium } from '@playwright/test';
 import { pageFixture } from './pageFixture';
 
@@ -23,7 +23,6 @@ After(async function ({ pickle, result }) {
         const image = await pageFixture.page.screenshot({path:`./test-result/screenshots/${pickle.name}.png`, type: "png"});
         await this.attach(image, "image/png");
     }
-    await page.waitForTimeout(3000)
     await page.close();
     await context.close();
 })
