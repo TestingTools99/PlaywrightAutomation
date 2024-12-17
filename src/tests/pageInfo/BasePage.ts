@@ -23,7 +23,7 @@ export default class BasePage
    * @param locator - The Playwright locator for the element to be highlighted and clicked
    * @param styles - The styles to be applied to the element for highlighting (e.g., border, background color)
    */
-  async highlightAndClick(locator: Locator, styles: string = 'border: 2px solid blue; background-color: saddlebrown;') {
+  async highlightAndClick(locator: Locator, styles: string = 'border: 2px solid blue; background-color: red;') {
     // Apply styles to highlight the element
     await locator.evaluate((element: HTMLElement, styles: string) => {
       element.style.cssText = styles;
@@ -42,7 +42,7 @@ export default class BasePage
    * @param styles - The styles to be applied to the element for highlighting (default: border and background)
    * @param assertionFn - The assertion function to be used for verification (default: checking visibility)
    */
-  async highlightAndVerify(locator: Locator, styles: string = 'border: 3px solid blue; background-color: lightcoral;', assertionFn?: (locator: Locator) => void) {
+  async highlightAndVerify(locator: Locator, styles: string = 'border: 3px solid blue; background-color:green;', assertionFn?: (locator: Locator) => void) {
     // Apply styles to highlight the element
     await locator.evaluate((element: HTMLElement, styles: string) => {
       element.style.cssText = styles;

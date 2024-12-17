@@ -1,5 +1,5 @@
 import { After, AfterAll, AfterStep, Before, BeforeAll, BeforeStep, Status } from '@cucumber/cucumber';
-import { Browser, BrowserContext, Page, chromium } from '@playwright/test';
+import { Browser, BrowserContext, Page, chromium, firefox } from '@playwright/test';
 import { pageFixture } from './pageFixture';
 
 let browser: Browser;
@@ -7,7 +7,7 @@ let page: Page;
 let context: BrowserContext
 
 BeforeAll(async function () {
-    browser = await chromium.launch({ headless: false})
+    browser = await firefox.launch({ headless: false})
 })
 
 Before(async function () {

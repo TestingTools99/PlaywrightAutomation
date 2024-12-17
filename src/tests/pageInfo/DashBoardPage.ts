@@ -42,7 +42,7 @@ export class DashBoardPage extends BasePage
     async clickOnAddorganizationLink()
     {
       await this.highlightAndClick(this.addOrganizationLink)
-      await this.page.waitForFunction(() => document.title.includes('Add your business'), { timeout: 10000 });
+      await this.page.waitForLoadState('load'); 
     }
   
     async verifyAddBusinessPage()
