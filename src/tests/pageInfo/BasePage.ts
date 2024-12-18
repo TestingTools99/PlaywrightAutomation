@@ -23,7 +23,7 @@ export default class BasePage
    * @param locator - The Playwright locator for the element to be highlighted and clicked
    * @param styles - The styles to be applied to the element for highlighting (e.g., border, background color)
    */
-  async highlightAndClick(locator: Locator, styles: string = 'border: 2px solid blue; background-color: red;') {
+  async highlightAndClick(locator: Locator, styles: string = 'border: 2px solid blue; background-color: lightgreen;') {
     // Apply styles to highlight the element
     await locator.evaluate((element: HTMLElement, styles: string) => {
       element.style.cssText = styles;

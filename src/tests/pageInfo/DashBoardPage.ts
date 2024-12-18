@@ -1,8 +1,7 @@
 import { Locator, Page, expect } from "@playwright/test";
 import BasePage from "./BasePage";
-import { pageFixture } from "../../hooks/pageFixture";
 import { WaitUtils } from "../../utils/WaitUtils";
-import exp from "constants";
+
 
 export class DashBoardPage extends BasePage
 {
@@ -10,6 +9,9 @@ export class DashBoardPage extends BasePage
     public readonly dashBoardLinkTab : Locator
     public readonly organizationDropdown :Locator
     public readonly addOrganizationLink :Locator
+    public readonly profileName :Locator
+    public readonly logoutButton :Locator
+
     constructor(page:Page)
     {
       super(page)
@@ -17,6 +19,8 @@ export class DashBoardPage extends BasePage
       this.dashBoardLinkTab = page.locator('div.xnav-header--main > nav > ol > li:nth-child(1) > a')
       this.organizationDropdown = page.locator(".xnav-appbutton--body")
       this.addOrganizationLink = page.locator("a[data-name='organisation-menu/add-organisation']")
+      this.profileName = page.locator('li:nth-child(6) > button > div')
+      this.logoutButton = page.locator("div.xnav-header--main > ol > li:nth-child(6) > div > div.xnav-dropdown--panel > div > ol > li.xnav-verticalmenuitem.xnav-verticalmenuitem-lefticon > a")
     }
 
     async checkDashBoardLinkTab()
@@ -51,6 +55,12 @@ export class DashBoardPage extends BasePage
       const title = await this.page.title()
       expect(title).toContain('Add your business')
       await this.highlightAndVerify(this.page.locator('form > h1'))
+    }
+
+    async logout() {
+      await this.profileName.click()
+      await WaitUtils.asyncWait(this.page,2000)
+      await this.logoutButton.click();
     }
 
 }

@@ -10,3 +10,6 @@ Feature: Organization details scenarios
         Then verify that Add organization link is visible and enabled
         When click on Add organization link
         Then verify that Add Business page
+        When User enters business details with "Demo Business" "House Construction" "New Zealand" "Yes" "Quickbooks"
+        And  click on Start trail button
+        Then  verify the Created Organization and displayed in the Organization dropdown
