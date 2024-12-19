@@ -1,0 +1,9 @@
+{
+  "createOrganization": {
+    "businessName": "Demo Business",
+    "industry": "House Construction",
+    "country": "New Zealand",
+    "employeeStatus": "Yes",
+    "selectTool": "Quickbooks"
+  }
+}

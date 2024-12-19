@@ -12,20 +12,43 @@ let loginPage:LoginPage
 let dashBoardPage:DashBoardPage
 
 BeforeAll(async function () {
-    browser = await firefox.launch({ headless: false})
+    const fs = require('fs');
+    const videoPath = './test-result/videos/';
+    const screenshotPath = './test-result/screenshots/';
+    if (!fs.existsSync(videoPath)) {
+        fs.mkdirSync(videoPath, { recursive: true });
+    }
+    if (!fs.existsSync(screenshotPath)) {
+        fs.mkdirSync(screenshotPath, { recursive: true });
+    }
+    browser = await chromium.launch({ headless: false}
+    )
 })
 
 Before(async function () {
-    context = await browser.newContext();
-    page = await browser.newPage();
-    // @ts-ignore
+    const path = require('path');
+    context = await browser.newContext({
+        recordVideo: {
+            dir: path.resolve('./test-result/videos/'),
+            size: { width: 1280, height: 720 }
+        }
+    });
+    page = await context.newPage(); // Ensure new page is created in the context
     pageFixture.page = page;
-})
+});
 
 After(async function () {
     loginPage = new LoginPage(pageFixture.page)
     dashBoardPage = new DashBoardPage(pageFixture.page)
     await dashBoardPage.logout()
+
+    const videoPath = await page.video()?.path();
+    if (videoPath) {
+        const fs = require('fs').promises;
+        const video = await fs.readFile(videoPath);
+        await this.attach(video, 'video/webm');
+    }
+    
     await page.close()
     await context.close()
 })
